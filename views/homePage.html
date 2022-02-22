@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
+    <script type="text/javascript">function reg() {
+        var name =
+          document.forms["RegForm"]["name"];
+        var email =
+          document.forms["RegForm"]["email"];
+        var password =
+          document.forms["RegForm"]["password"];
+
+        if (name.value == "") {
+          window.alert("Please enter your name.");
+          name.focus();
+          return false;
+        }
+
+
+        if (email.value == "" || !email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+          window.alert(
+            "Please enter a valid e-mail address.");
+          email.focus();
+          return false;
+        }
+
+
+        if (password.value == "") {
+          window.alert("Please enter your password");
+          password.focus();
+          return false;
+        }
+
+
+        return true;
+      }
+      </script>
+  </head>
+
+  <body style="height: 110vh">
+    <form class="form" action="/reg" method="POST" style="height: 100vh" name="RegForm" onsubmit="reg()">
+      <div
+        style="
+          color: #eee;
+          font-family: sans-serif;
+          font-size: 25px;
+          font-weight: 600;
+          margin-top: 30px;
+        "
+      >
+        Let's create your account!
+      </div>
+
+      <div class="input-container ic1">
+        <input
+          id="firstname"
+          class="input"
+          type="text"
+          name="name"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="firstname" class="placeholder">First name</label>
+      </div>
+
+      <div class="input-container ic2">
+        <input
+          id="surname"
+          class="input"
+          type="text"
+          name="surname"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="surname" class="placeholder">Surname</label>
+      </div>
+
+      <div class="input-container ic2">
+        <input
+          id="username"
+          class="input"
+          type="text"
+          name="username"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="username" class="placeholder">Username</label>
+      </div>
+
+      <div class="input-container ic2">
+        <input
+          id="email"
+          class="input"
+          type="text"
+          name="email"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="email" class="placeholder">Email</label>
+      </div>
+
+      <div class="input-container ic2">
+        <input
+          id="password"
+          class="input"
+          type="password"
+          placeholder=" "
+          name="password"
+          required
+        />
+        <div class="cut cut-short"></div>
+        <label for="password" class="placeholder">Password</label>
+      </div>
+      <button type="text" class="submit" style="margin-bottom: 38px;
+">Sign Up</button>
+      <br>
+      <div class="subtitle">
+        <a
+          href="/login"
+          role="button"
+          style="
+            padding-left: 25%;
+            color: #eee;
+            font-family: sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            margin-top: 30px;
+            text-decoration: none;
+          "
+          >Already registered?</a
+        >
+      </div>
+    </form>
+  </body>
+</html>

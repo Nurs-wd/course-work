@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client</title>
+    <link rel="stylesheet" href="./styleforclient.css" type="text/css" />
+    <link rel="stylesheet" href="./style.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="menu">
+        <ul class="main-menu">
+          <li class="active"><i class="fa fa-home"></i>Home</li>
+          <li onclick="openNav()"><i class="fa fa-user"></i>Purchase</li>
+          <li>
+            <i class="fa fa-search"></i
+            ><a href="/logout" style="text-decoration: none">Logout</a>
+          </li>
+        </ul>
+      </nav>
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+          >&times;</a
+        >
+        You are buying:
+        <br />
+        <span id="product"></span>
+        <button onclick="pay()" class="btn">Pay</button>
+        <br>
+        <br>
+              <div class="input-container ic1">
+                <input id="Search" class="input" type="text" name="name" placeholder=" "required />
+                <div class="cut"></div>
+                <label for="Search" class="placeholder">Search</label>
+              </div>
+              <button type="btn" onclick="search()">Find</button>
+        <div id="searchRes"></div>
+      </div>
+
+      <article>
+        <h1>Home</h1>
+        <div class="content">
+          <p>
+            The organization @myni.cake is an online bakery. The company is launched by a small entrepreneur
+            who owns this organization, called officially ‘myni cakes’. The company is located and based in Almaty on
+            Timiryazev st. 125/3 and promoting itself through an Instagram commercial business account – one of the most widespread
+            social networks. The owner of this home bakery, Mrs. Aigul, launched work on June of 17, 2021, and, now, counting only
+            one employee. The bakery has a diversified menu, which consists of different South Korean Bento cakes. These cakes may
+            vary in terms of size, filling, and appearance, depending on the client’s willingness.
+          </p>
+        </div>
+        <h1 id="list">Products</h1>
+        <div class="content">
+          <div class="products" id="prList"></div>
+        </div>
+      </article>
+    </div>
+  </body>
+  <script type="text/javascript">
+    /* Set the width of the side navigation to 250px */
+    function openNav() {
+      document.getElementById('mySidenav').style.width = '250px';
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+      document.getElementById('mySidenav').style.width = '0';
+    }
+
+    function buy(obj) {
+      let price = obj.childNodes[1].innerHTML;
+      let label = obj.parentNode.children[0].innerHTML;
+      let res = document.createElement('div');
+      res.innerHTML = label + ' - ' + price;
+      document.getElementById('product').appendChild(res);
+    }
+
+    async function products() {
+      let data = await fetch('/products');
+      if (!data) {
+        document.getElementsByTagName(
+          'product'
+        ).innerHTML = `<h1>There are no available orders</h1>`;
+      }
+      data = await data.json();
+      let arr = data;
+      function swap(arr, xp, yp) {
+        var temp = arr[xp];
+        arr[xp] = arr[yp];
+        arr[yp] = temp;
+      }
+
+      // An optimized version of Bubble Sort
+      function bubbleSort(arr, n) {
+        var i, j;
+        for (i = 0; i < n - 1; i++) {
+          for (j = 0; j < n - i - 1; j++) {
+            if (arr[j].price > arr[j + 1].price) {
+              swap(arr, j, j + 1);
+            }
+          }
+        }
+      }
+
+      // Driver program to test above functions
+      var n = arr.length;
+      bubbleSort(arr, n);
+      let el = document.getElementById('prList');
+      let result = '';
+
+      for (let i = 0; i < arr.length; i++) {
+        //{label: 'Lars', price: 321.34, img: 'img1.png'}
+        // <div>
+        //   <h3>Product 1</h3>
+        //   <img src="./img1.png" alt="product 1" />
+        //   <a onclick="buy(this)" href="#list"
+        //     >Buy for <strong>23.43$</strong
+        //   ></a>
+        // </div >
+        result += `<div id='res'> <h3>${arr[i].label}</h3> <img src="./${arr[i].img}" alt= 'product' /> <a href='#list' onclick="buy(this)">Buy for <strong>${arr[i].price}</strong> </a></div>`;
+      }
+      el.innerHTML = result;
+    }
+    products();
+
+    function search() {
+      let res = document.querySelectorAll('#res')
+      let find = document.getElementById('Search')
+      find = find.value.trim()
+      let final = document.querySelector('#searchRes')
+      for(let i = 0; i < res.length; i++) {
+        if(!find || find.trim() === '') {
+          window.alert('Type again!')
+          break;
+        }
+        if(find = res[i].children[0].innerHTML){
+          final.innerHTML = res[i].children[0].innerHTML
+        }
+        if(i+1 == res.length && final.innerHTML == ''){
+          window.alert('Cannot find!')
+        }
+      }
+    }
+  </script>
+</html>
