@@ -112,14 +112,7 @@
       let result = '';
 
       for (let i = 0; i < arr.length; i++) {
-        //{label: 'Lars', price: 321.34, img: 'img1.png'}
-        // <div>
-        //   <h3>Product 1</h3>
-        //   <img src="./img1.png" alt="product 1" />
-        //   <a onclick="buy(this)" href="#list"
-        //     >Buy for <strong>23.43$</strong
-        //   ></a>
-        // </div >
+
         result += `<div id='res'> <h3>${arr[i].label}</h3> <img src="./${arr[i].img}" alt= 'product' /> <a href='#list' onclick="buy(this)">Buy for <strong>${arr[i].price}</strong> </a></div>`;
       }
       el.innerHTML = result;
