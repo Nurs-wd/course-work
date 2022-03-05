@@ -11,7 +11,7 @@ async function login(req, response) {
   let loginInfo = db.query(sql, (err, res) => {
     var data;
     if (err || !res) {
-      res.send(`
+      response.send(`
             <h1 style="text-align: center; margin-top:3em">User name or password was invalid. Try again!</h1>
             `);
     } else {
