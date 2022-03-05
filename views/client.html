@@ -129,12 +129,12 @@
           window.alert('Type again!')
           break;
         }
-        if(find = res[i].children[0].innerHTML){
-          final.innerHTML = res[i].children[0].innerHTML
+        if(find === res[i].children[0].innerHTML){
+          final.innerHTML = res[i].children[2].children[0].innerHTML
         }
-        if(i+1 == res.length && final.innerHTML == ''){
+          if(i+1 === res.length && final.innerHTML == ''){
           window.alert('Cannot find!')
-        }
+          }
       }
     }
   </script>
